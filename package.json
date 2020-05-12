@@ -2,10 +2,17 @@
     "name": "giuseppe2",
     "version": "1.0.0",
     "description": "A discord utility bot.",
-    "main": "giuseppe.js",
+    "main": "src/giuseppe.js",
     "scripts": {
+        "lint": "eslint src/**",
+        "fix-lint": "eslint --fix src/**",
+        "start": "nodemon src/giuseppe.js --exec \"npm run lint && node\"",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "",
-    "license": "ISC"
+    "license": "ISC",
+    "devDependencies": {
+        "eslint": "^7.0.0",
+        "nodemon": "^2.0.3"
+    }
 }
