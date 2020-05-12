@@ -1,4 +1,6 @@
 const Discord = require('discord.js') // eslint-disable-line no-unused-vars
+// const mongo = require('../../mongo/connect')
+const integrityCheck = require('../../integrityCheck')
 
 /**
  * @param {Discord.Client} client bot client
@@ -7,6 +9,11 @@ const Discord = require('discord.js') // eslint-disable-line no-unused-vars
 module.exports = (client, message) => {
 
     if (message.author.bot) return
+    if (!integrityCheck.checkMessageIntegrity(message)) return
+
+
+    // commands below :^))))
+
     if (message.content.indexOf(client.secrets.discord.prefix) !== 0) return
 
     const args = message.content.slice(client.secrets.discord.prefix.length).trim().split(/ +/g)

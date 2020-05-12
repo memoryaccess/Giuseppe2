@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const secrets = require('../../secrets.json')
+const util = require('util')
 
 const serversSchema = require('./schemas/servers.js')
 
@@ -30,12 +31,14 @@ const log = (server, type, action, issue, data) => {
                 type,
                 action,
                 issue,
-                timestamp: new Date().toString(),
-                data
+                timestamp: new Date(),
+                data: util.inspect(data)
             }
         }
-    }, { upsert: true }).then(() => { console.log('saved') })
-        .catch(console.error)
+    }, { upsert: true })
+        .catch(e => {
+            console.log({error: e, logMessage: {type, action, issue, timestamp: new Date(), data: util.inspect(data)}})
+        })
 }
 
 module.exports = {

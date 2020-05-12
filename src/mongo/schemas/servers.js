@@ -10,8 +10,8 @@ let serversSchema = new Schema({
             action: String,
             issue: String,
             timestamp: {
-                type: String,
-                default: new Date().toString()
+                type: Date,
+                default: new Date()
             },
             data: Object,
         }
