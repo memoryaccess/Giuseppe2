@@ -1,18 +1,18 @@
-const mongoose = require('mongoose')
-const secrets = require('../../secrets.json')
-const util = require('util')
+const mongoose = require('mongoose');
+const secrets = require('../../secrets.json');
+const util = require('util');
 
-const serversSchema = require('./schemas/servers.js')
+const serversSchema = require('./schemas/servers.js');
 
-const Servers = mongoose.model('Servers', serversSchema)
+const Servers = mongoose.model('Servers', serversSchema);
 
 
 const connect = () => {
     mongoose.connect(secrets.mongo.server, {
         useNewUrlParser: true,
         useUnifiedTopology: true
-    })
-}
+    });
+};
 
 
 /**
@@ -37,11 +37,11 @@ const log = (server, type, action, issue, data) => {
         }
     }, { upsert: true })
         .catch(e => {
-            console.log({error: e, logMessage: {type, action, issue, timestamp: new Date(), data: util.inspect(data)}})
-        })
-}
+            console.log({error: e, logMessage: {type, action, issue, timestamp: new Date(), data: util.inspect(data)}});
+        });
+};
 
 module.exports = {
     log,
     connect
-}
+};

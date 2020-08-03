@@ -1,6 +1,7 @@
-const Discord = require('discord.js') // eslint-disable-line no-unused-vars
+// eslint-disable-next-line no-unused-vars
+const Discord = require('discord.js');
 // const mongo = require('../../mongo/connect')
-const integrityCheck = require('../../integrityCheck')
+const integrityCheck = require('../../integrityCheck');
 
 /**
  * @param {Discord.Client} client bot client
@@ -8,21 +9,22 @@ const integrityCheck = require('../../integrityCheck')
  */
 module.exports = (client, message) => {
 
-    if (message.author.bot) return
-    if (!integrityCheck.checkMessageIntegrity(message)) return
+    if (message.author.bot) return;
+
+    const serverID = message.guild.id || 'general';
+
+    if (!integrityCheck.checkMessageIntegrity(message, serverID)) return;
 
 
-    // commands below :^))))
+    if (message.content.indexOf(client.secrets.discord.prefix) !== 0) return;
 
-    if (message.content.indexOf(client.secrets.discord.prefix) !== 0) return
+    const args = message.content.slice(client.secrets.discord.prefix.length).trim().split(/ +/g);
+    const command = args.shift().toLowerCase();
 
-    const args = message.content.slice(client.secrets.discord.prefix.length).trim().split(/ +/g)
-    const command = args.shift().toLowerCase()
+    const cmd = client.commands.get(command);
 
-    const cmd = client.commands.get(command)
+    if (!cmd) return;
 
-    if (!cmd) return
+    cmd.run(client, message, args);
 
-    cmd.run(client, message, args)
-
-}
+};
