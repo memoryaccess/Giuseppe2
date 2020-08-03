@@ -1,5 +1,5 @@
-let mongoose = require('mongoose')
-let Schema = mongoose.Schema
+let mongoose = require('mongoose');
+let Schema = mongoose.Schema;
 
 let actionLogSchema = new Schema({
     type: String,
@@ -10,6 +10,6 @@ let actionLogSchema = new Schema({
         default: Date.now
     },
     data: Object,
-})
+});
 
-module.exports = actionLogSchema
+module.exports = actionLogSchema;

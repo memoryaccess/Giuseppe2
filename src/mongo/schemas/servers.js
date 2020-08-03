@@ -1,5 +1,5 @@
-let mongoose = require('mongoose')
-let Schema = mongoose.Schema
+let mongoose = require('mongoose');
+let Schema = mongoose.Schema;
 
 let serversSchema = new Schema({
     serverId: String,
@@ -16,6 +16,6 @@ let serversSchema = new Schema({
             data: Object,
         }
     }
-})
+});
 
-module.exports = serversSchema
+module.exports = serversSchema;
